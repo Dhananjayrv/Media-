@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add your stylesheets and scripts here -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #3494e6, #ec6ead);
+            color: #ffffff;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-top: 5%;
+        }
+
+        #imagePreview, #mediaPreview {
+            margin-top: 10px;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Add dark grey color to text */
+        h1, h2, p, label, option {
+            color: #333333; /* Dark grey color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Welcome to the Dashboard</h1>
+
+        <!-- Blog Management Section -->
+        <div class="mt-5">
+            <h2>Blog Management</h2>
+            <p>Use the form below to add, edit, or delete a blog.</p>
+
+            <!-- Add Blog Form -->
+            <!-- Add Blog Form -->
+        <form action="/add_blog" method="post" enctype="multipart/form-data" class="mb-4">
+            <h2>Add a New Blog</h2>
+            <div class="form-group">
+                <label for="addTitle">Title:</label>
+                <input type="text" id="addTitle" name="title" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="addContent">Content:</label>
+                <textarea id="addContent" name="content" class="form-control" required></textarea>
+            </div>
+
+            <!-- Add an input for uploading images -->
+            <div class="form-group">
+                <label for="addImage">Image:</label>
+                <input type="file" id="addImage" name="image" class="form-control-file" accept="image/*">
+                <!-- Image preview box -->
+                <img id="imagePreview" src="#" alt="Image Preview">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Blog</button>
+        </form>
+
+        <!-- Edit Blog Form directly in the Dashboard -->
+        <div id="editBlogForm" class="mb-4">
+            <h2>Edit a Blog</h2>
+            <form action="/edit_blog" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="editTitle">Select Title to Edit:</label>
+                    <select id="editTitle" name="title_to_edit" class="form-control" required>
+                        {% for post in posts %}
+                            <option value="{{ post.title }}">{{ post.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Actual form fields for editing -->
+                <div class="form-group">
+                    <label for="editPostTitle">Title:</label>
+                    <input type="text" id="editPostTitle" name="title" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPostContent">Content:</label>
+                    <textarea id="editPostContent" name="content" class="form-control" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPostImage">Image:</label>
+                    <input type="file" id="editPostImage" name="image" class="form-control-file" accept="image/*">
+                    <!-- Image preview box -->
+                    <img id="editImagePreview" src="#" alt="Image Preview">
+                </div>
+
+                <button type="submit" class="btn btn-warning">Edit Blog</button>
+            </form>
+        </div>
+
+        <!-- Delete Blog Form -->
+        <form action="/delete_blog" method="post">
+            <h2>Delete a Blog</h2>
+            <div class="form-group">
+                <label for="deleteTitle">Title to Delete:</label>
+                <select id="deleteTitle" name="title_to_delete" class="form-control" required>
+                    {% for post in posts %}
+                        <option value="{{ post.title }}">{{ post.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Blog</button>
+        </form>
+
+        <!-- Media Management Section -->
+        <div class="mt-5">
+            <h2>Gallery Management</h2>
+            <p>Use the form below to upload or delete media.</p>
+
+            <!-- Upload Media Form -->
+            <form action="/upload_media" method="post" enctype="multipart/form-data" class="mb-4">
+                <h2>Upload Media</h2>
+                <div class="form-group">
+                    <label for="addTitle">Title:</label>
+                    <input type="text" id="addTitle" name="title" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="addMedia">Media:</label>
+                    <input type="file" id="addMedia" name="media" class="form-control-file" accept="image/*, video/*">
+                    <!-- Media preview box -->
+                    <div id="mediaPreview"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Upload Media</button>
+            </form>
+
+            <!-- Delete Media Form -->
+            <form action="/delete_media" method="post">
+                <h2>Delete Media</h2>
+                <div class="form-group">
+                    <label for="deleteTitle">Title to Delete:</label>
+                    <select id="deleteTitle" name="media_id" class="form-control" required>
+                        {% for media in media_list %}
+                            <option value="{{ media.id }}">{{ media.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete Media</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Add your additional content or scripts here -->
+
+    <!-- Script for image preview and loading edit form -->
+    <script>
+        // Function to preview the selected image and display filename
+        function previewAndDisplayImage(input, previewId) {
+            var preview = document.getElementById(previewId);
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                // Display the image and filename
+                preview.src = reader.result;
+                displayImageFilename(preview, file);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                // Reset the preview if no file is selected
+                preview.src = "#";
+                preview.alt = "";
+            }
+        }
+
+        // Function to display the image filename in the preview box
+        function displayImageFilename(preview, file) {
+            if (file) {
+                // Display the filename in the preview box
+                preview.alt = 'Image Preview';
+                preview.style.width = 'auto';
+                preview.style.height = 'auto';
+                preview.style.maxWidth = '100%';
+                preview.style.maxHeight = '100%';
+                preview.style.marginTop = '10px';
+
+                // Extract and display only the filename
+                var filename = file.name;
+                preview.insertAdjacentHTML('afterbegin', '<strong>' + filename + '</strong>');
+            }
+        }
+
+        // Attach the previewAndDisplayImage function to the change event of the file inputs
+        document.getElementById('addImage').addEventListener('change', function () {
+            previewAndDisplayImage(this, 'imagePreview');
+        });
+
+        document.getElementById('editPostImage').addEventListener('change', function () {
+            previewAndDisplayImage(this, 'editImagePreview');
+        });
+
+        // Function to load the edit form with selected post data
+        function loadEditForm() {
+            var selectedPostTitle = document.getElementById('editTitle').value;
+            var selectedPost = getPostByTitle(selectedPostTitle);
+
+            if (selectedPost) {
+                // Update form fields with selected post data
+                document.getElementById('editPostTitle').value = selectedPost.title;
+                document.getElementById('editPostContent').value = selectedPost.content;
+
+                // Display the image and filename
+                document.getElementById('editImagePreview').src = '/static/images/' + selectedPost.image;
+                displayImageFilename(document.getElementById('editImagePreview'), { name: selectedPost.image });
+
+                // Show the form for editing
+                document.getElementById('editBlogForm').style.display = 'block';
+            } else {
+                alert('Selected post not found. Please choose a valid post.');
+            }
+        }
+
+        // Function to get a post object by title
+        function getPostByTitle(postTitle) {
+            // Assuming posts is an array of post objects
+            for (var i = 0; i < posts.length; i++) {
+                if (posts[i].title === postTitle) {
+                    return posts[i];
+                }
+            }
+            return null;
+        }
+
+        // Load edit form on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadEditForm();
+        });
+
+        // Function to preview the selected media and display filename
+        function previewAndDisplayMedia(input, previewId) {
+            var preview = document.getElementById(previewId);
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                // Display the media and filename
+                preview.innerHTML = ''; // Clear previous content
+
+                if (file.type.startsWith('image/')) {
+                    // Display image preview
+                    var image = document.createElement('img');
+                    image.src = reader.result;
+                    image.alt = 'Media Preview';
+                    preview.appendChild(image);
+                } else if (file.type.startsWith('video/')) {
+                    // Display video preview
+                    var video = document.createElement('video');
+                    video.preload = 'auto';
+                    video.controls = true;
+
+                    // Set a source element with the correct MIME type
+                    var source = document.createElement('source');
+                    source.src = reader.result;
+                    source.type = file.type;
+                    video.appendChild(source);
+
+                    preview.appendChild(video);
+                }
+
+                displayMediaFilename(preview, file);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                // Reset the preview if no file is selected
+                preview.innerHTML = '';
+            }
+        }
+
+        // Function to display the media filename in the preview box
+        function displayMediaFilename(preview, file) {
+            if (file) {
+                // Display the filename in the preview box
+                var filename = file.name;
+                preview.insertAdjacentHTML('beforeend', '<strong>' + filename + '</strong>');
+            }
+        }
+
+        // Attach the previewAndDisplayMedia function to the change event of the file input
+        document.getElementById('addMedia').addEventListener('change', function () {
+            previewAndDisplayMedia(this, 'mediaPreview');
+        });
+    </script>
+</body>
+
+</html>

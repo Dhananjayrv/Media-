@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Owl Carousel CSS links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Add your stylesheets and scripts here -->
+    <link href="/static/css/style.css" rel="stylesheet"> <!-- Add this line for custom styles -->
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #3494e6, #ec6ead);
+            color: #ffffff;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 1500px;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            padding: 1rem 0;
+            color: #fff;
+            border-bottom: 2px solid #28a745;
+            margin: 0;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #28a745;
+        }
+
+        .navbar-toggler {
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+        .navbar-toggler:focus,
+        .navbar-toggler:hover {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .brand-text {
+            margin-left: 10px;
+        }
+
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .owl-carousel {
+            width: 100%;
+        }
+
+        .gallery-item {
+            margin: 10px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+            flex: 0 0 auto;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            margin-top: 10px;
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #007bff;
+            display: none;
+            text-decoration: none;
+        }
+
+        .nav-btns {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+        }
+
+        .nav-btn {
+            font-weight: bold;
+            font-size: 16px;
+            color: #fff;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: #28a745;
+        }
+
+        .about-btn {
+            color: #28a745;
+        }
+
+        .contact-btn {
+            color: #007bff;
+        }
+
+        .signin-btn {
+            color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>info@example.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{{ url_for('home') }}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{{ url_for('home') }}" class="nav-item nav-link {% if request.path == url_for('home') %}active{% endif %}">Home</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link {% if request.path == url_for('about') %}active{% endif %}">About</a>
+                    <a href="{{ url_for('course') }}" class="nav-item nav-link {% if request.path == url_for('course') %}active{% endif %}">Courses</a>
+                    <a href="{{ url_for('signin') }}" class="nav-item nav-link {% if request.path == url_for('signin') %}active{% endif %}">Sign in</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{ url_for('detail') }}" class="dropdown-item">Course Detail</a>
+                            <a href="{{ url_for('feature') }}" class="dropdown-item">Our Features</a>
+                            <a href="{{ url_for('team') }}" class="dropdown-item">Instructors</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link {% if request.path == url_for('contact') %}active{% endif %}">Contact</a>
+                </div>
+                <a href="{{ url_for('join_us') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Join Us</a>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center my-5 py-5">
+            <h1 class="text-white mt-4 mb-4">Learn From Home</h1>
+            <h1 class="text-white display-1 mb-5">Education Courses</h1>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Courses</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Courses 1</a>
+                            <a class="dropdown-item" href="#">Courses 2</a>
+                            <a class="dropdown-item" href="#">Courses 3</a>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary px-4 px-lg-5">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+        <!-- Gallery Start -->
+        <div class="container mt-5">
+            <h1 class="text-center">Media Gallery</h1>
+
+            <!-- Display Gallery using Owl Carousel -->
+            <div class="gallery-container">
+                <div class="owl-carousel owl-theme">
+                    {% for media in media_list %}
+                    <div class="gallery-item" data-contentid="{{ media.id }}" onclick="handleGalleryItemClick('{{ url_for('view_content', content_id=media.id, _external=True) }}', '{{ media.filename.lower() }}')">
+
+                        {% if media.filename.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')) %}
+                            <div style="position: relative;">
+                                <video controls muted width="100%" height="auto" poster="{{ url_for('static', filename='media/' + media.filename.replace('.mp4', '.jpg')) }}">
+                                    <source src="{{ url_for('static', filename='media/' + media.filename) }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; color: #fff;">
+                                    &#127909;
+                                </span>
+                            </div>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='media/' + media.filename) }}" alt="{{ media.title }}">
+                        {% endif %}
+
+                        <p class="gallery-caption">{{ media.title }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Back to Top -->
+            <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+        <!-- Gallery End -->
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Add Owl Carousel JS links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- Add your other script links here -->
+
+    <!-- Custom JavaScript for Owl Carousel Initialization -->
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                items: 3,
+                margin: 20,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+
+        function handleGalleryItemClick(url, fileType) {
+            if (fileType.endsWith('.mp4') || fileType.endsWith('.avi') || fileType.endsWith('.mkv') || fileType.endsWith('.mov')) {
+                openMediaInNewTab(url);
+            } else {
+                openBlogInNewTab(url);
+            }
+        }
+
+        function openMediaInNewTab(url) {
+            window.open(url, '_blank');
+        }
+
+        function openBlogInNewTab(url) {
+            var newTab = window.open();
+            newTab.opener = null;
+            newTab.location.href = url;
+        }
+    </script>
+</body>
+
+</html>

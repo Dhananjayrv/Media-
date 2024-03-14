@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Owl Carousel CSS links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Add your stylesheets and scripts here -->
+    <link href="/static/css/style.css" rel="stylesheet"> <!-- Add this line for custom styles -->
+
+    <style>
+        body {
+    background: linear-gradient(135deg, #3494e6, #ec6ead);
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 2200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.transparent-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.jumbotron {
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    background-size: cover;
+    background-position: center center;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.navbar {
+    background-color: #343a40;
+    padding: 1rem 0;
+    color: #fff;
+    border-bottom: 2px solid #28a745;
+    margin: 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #28a745;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-toggler {
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:hover {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.brand-text {
+    margin-left: 10px;
+}
+
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .owl-carousel {
+            width: 100%;
+        }
+
+        .gallery-item {
+            width: 300px;
+    height: 300px;
+    margin-right: 20px;
+    margin-bottom: 20px; /* Add margin-bottom for spacing between items */
+    position: relative;
+    overflow: hidden; /* Adjust the height as needed */
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.gallery-item img:hover,
+.gallery-item video:hover {
+    transform: scale(1.1);
+}
+
+
+    .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    z-index: 1;
+}
+
+/* Added media-container style for consistent styling of images and videos */
+.media-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #007bff;
+            display: none;
+            text-decoration: none;
+        }
+
+        .nav-btns {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+        }
+
+        .nav-btn {
+            font-weight: bold;
+            font-size: 16px;
+            color: #fff;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: #28a745;
+        }
+
+        .about-btn {
+            color: #28a745;
+        }
+
+        .contact-btn {
+            color: #007bff;
+        }
+
+        .signin-btn {
+            color: #dc3545;
+        }
+
+        .dropdown-menu a {
+        color: #000 !important;
+    }
+
+    /* Style for the dropdown menu background */
+    .dropdown-menu {
+        background-color: #fff !important;
+    }
+
+    /* Style for the dropdown menu border */
+    .dropdown-menu::before {
+        border-bottom: 10px solid #343a40 !important;
+    }
+    .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-link {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .gallery-item {
+    width: 300px;
+    height: 300px;
+    margin-right: 20px; /* Adjust the margin as needed */
+    flex-shrink: 0; /* Add this line to prevent items from shrinking */
+}
+
+.owl-carousel {
+    display: flex;
+    flex-wrap: nowrap; /* Add this line to prevent items from wrapping */
+}
+
+.owl-item {
+    width: auto !important; /* Add this line to prevent items from inheriting width from parent */
+}
+    
+.gallery-item video::after {
+    content: '\25BA'; /* Unicode character for play button */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.owl-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.owl-dot {
+    display: inline-block;
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: #28a745;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+}
+
+.owl-dot.active {
+    background-color: #218838;
+}
+.owl-dots {
+    display: none !important;
+}
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+    
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+918210211847</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>kdhananjay444@gmail.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{{ url_for('home') }}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{{ url_for('home') }}" class="nav-item nav-link {% if request.path == url_for('home') %}active{% endif %}">Home</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link {% if request.path == url_for('about') %}active{% endif %}">About</a>
+                    <a href="{{ url_for('course') }}" class="nav-item nav-link {% if request.path == url_for('course') %}active{% endif %}">Courses</a>
+                    <a href="{{ url_for('gallery') }}" class="nav-item nav-link {% if request.path == url_for('gallery') %}active{% endif %}">Gallery</a>
+                    <a href="{{ url_for('blog') }}" class="nav-item nav-link {% if request.path == url_for('blog') %}active{% endif %}">Blog</a>
+                    <a href="{{ url_for('signin') }}" class="nav-item nav-link {% if request.path == url_for('signin') %}active{% endif %}">Sign in</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{ url_for('detail') }}" class="dropdown-item">Course Detail</a>
+                            <a href="{{ url_for('feature') }}" class="dropdown-item">Our Features</a>
+                            <a href="{{ url_for('team') }}" class="dropdown-item">Instructors</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link {% if request.path == url_for('contact') %}active{% endif %}">Contact</a>
+                </div>
+                
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <!-- Header Start -->
+<!-- Header Start -->
+<div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+    <div class="container text-center py-5">
+        <h1 class="text-white display-1">Gallery</h1>
+        <div class="d-inline-flex text-white mb-5">
+            <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Gallery</p>
+        </div>
+        <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Courses</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Courses 1</a>
+                        <a class="dropdown-item" href="#">Courses 2</a>
+                        <a class="dropdown-item" href="#">Courses 3</a>
+                    </div>
+                </div>
+                <input type="text" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary px-4 px-lg-5">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+
+        <!-- Gallery Start -->
+        <div class="container mt-5">
+            <h1 class="text-center">Media Gallery</h1>
+        
+            <!-- Display Gallery using Owl Carousel -->
+            <div class="gallery-container">
+                <div class="owl-carousel owl-theme" id="gallery-carousel">
+                    {% for media in media_list %}
+                        {% if media.filename.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')) %}
+                            <div class="gallery-item" data-contentid="{{ media.id }}"
+                                onclick="handleGalleryItemClick('{{ url_for('view_content', content_id=media.id, _external=True) }}', '{{ media.filename.lower() }}')">
+                                <div class="media-container">
+                                    <video controls muted width="100%" height="100%"
+                                        poster="{{ url_for('static', filename='media/' + media.filename.replace('.mp4', '.jpg')) }}">
+                                        <source src="{{ url_for('static', filename='media/' + media.filename) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <p class="gallery-caption">{{ media.title }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% for media in media_list %}
+                        {% if not media.filename.lower().endswith(('.mp4', '.avi', '.mkv', '.mov')) %}
+                            <div class="gallery-item" data-contentid="{{ media.id }}"
+                                onclick="handleGalleryItemClick('{{ url_for('view_content', content_id=media.id, _external=True) }}', '{{ media.filename.lower() }}')">
+                                <div class="media-container">
+                                    <img src="{{ url_for('static', filename='media/' + media.filename) }}" alt="{{ media.title }}">
+                                </div>
+                                <p class="gallery-caption">{{ media.title }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+            <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+
+            <!-- JavaScript Libraries -->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!-- Add Owl Carousel JS scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+            
+            <script>
+                $(document).ready(function () {
+                    var owl = $("#gallery-carousel");
+            
+                    owl.owlCarousel({
+                        items: 3,
+                        margin: 20,
+                        loop: false,
+                        autoplay: false,
+                        responsive: {
+                            0: { items: 1 },
+                            600: { items: 3 },
+                            1000: { items: 6 }
+                        },
+                    });
+            
+                    // Existing function to handle gallery item click
+                    function handleGalleryItemClickDefault(url, fileType) {
+                        // Your existing logic
+                        // ...
+                        console.log("Default handling:", url);
+                    }
+            
+                    // Additional function to handle gallery item click with new functionality
+                    function handleGalleryItemClickNew(url, fileType) {
+                        redirectToReadMore(url);
+                    }
+            
+                    // Assign the new function to handle gallery item click
+                    var handleGalleryItemClick = handleGalleryItemClickNew;
+            
+                    // Handle custom pagination
+                    var totalItems = owl.find('.owl-item').length;
+                    var itemsPerPage = 3;
+                    var totalPages = Math.ceil(totalItems / itemsPerPage);
+                    var currentPage = 1;
+                    var maxButtonsToShow = 3;  // Adjust this value as needed
+            
+                    // Add previous button (<<)
+                    var prevButton = $('<button class="page-link">&lt;&lt;</button>');
+                    prevButton.on('click', function () {
+                        showPage(currentPage - 1);
+                    });
+                    $('#pagination').append(prevButton);
+            
+                    // Add numbered buttons
+                    for (var i = 1; i <= totalPages; i++) {
+                        if (i <= maxButtonsToShow || i > totalPages - maxButtonsToShow) {
+                            var pageButton = $('<button class="page-link">' + i + '</button>');
+                            pageButton.data('page', i);
+                            pageButton.on('click', function () {
+                                var page = $(this).data('page');
+                                showPage(page);
+                            });
+                            $('#pagination').append(pageButton);
+                        } else if (i === maxButtonsToShow + 1) {
+                            // Add ellipsis after the first set of buttons
+                            $('#pagination').append('<span class="ellipsis">...</span>');
+                        }
+                    }
+            
+                    // Add next button (>>)
+                    var nextButton = $('<button class="page-link">&gt;&gt;</button>');
+                    nextButton.on('click', function () {
+                        showPage(currentPage + 1);
+                    });
+                    $('#pagination').append(nextButton);
+            
+                    // Handle page button click event
+                    function showPage(page) {
+                        if (page >= 1 && page <= totalPages) {
+                            owl.trigger('to.owl.carousel', [(page - 1) * itemsPerPage, 300, true]);
+                            currentPage = page;
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <!-- Gallery End -->
+
+        <!-- Your other HTML content... -->
+
+        <footer class="bg-dark text-white">
+            <div class="container-fluid">
+                <div class="container mt-4 pt-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <a href="{{ url_for('home') }}" class="navbar-brand">
+                                <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex flex-column align-items-start">
+                                <!-- Vertical List of Buttons -->
+                                <div class="mb-3">
+                                    <a href="{{ url_for('home') }}" class="btn btn-link text-white">Home</a>
+                                    <a href="{{ url_for('about') }}" class="btn btn-link text-white">About</a>
+                                    <a href="{{ url_for('course') }}" class="btn btn-link text-white">Courses</a>
+                                    <a href="{{ url_for('gallery') }}" class="btn btn-link text-white">Gallery</a>
+                                    <a href="{{ url_for('blog') }}" class="btn btn-link text-white">Blog</a>
+                                    <a href="{{ url_for('signin') }}" class="btn btn-link text-white">Sign in</a>
+                                    <a href="{{ url_for('contact') }}" class="btn btn-link text-white">Contact</a>
+                                </div>
+                                <!-- End of Vertical List -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+</html>

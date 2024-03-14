@@ -1,0 +1,445 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Your Blog Title</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome CSS link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Add Owl Carousel CSS links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Add your stylesheets and scripts here -->
+    <link href="/static/css/style.css" rel="stylesheet"> <!-- Add this line for custom styles -->
+
+    <style>
+        body {
+    background: linear-gradient(135deg, #3494e6, #ec6ead);
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 2200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.transparent-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.jumbotron {
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    background-size: cover;
+    background-position: center center;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.navbar {
+    background-color: #343a40;
+    padding: 1rem 0;
+    color: #fff;
+    border-bottom: 2px solid #28a745;
+    margin: 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #28a745;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-toggler {
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:hover {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.brand-text {
+    margin-left: 10px;
+}
+
+.blog-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.blog-item {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.blog-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.blog-caption {
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.blog-caption h3,
+.blog-caption p {
+    margin: 0;
+}
+
+.blog-caption h3 {
+    font-size: 18px;
+}
+
+.blog-caption p {
+    font-size: 14px;
+}
+
+.blog-item:hover {
+    transform: scale(1.03);
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #007bff;
+    display: none;
+    text-decoration: none;
+}
+
+.owl-dots {
+    display: none !important;
+}
+
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Topbar Start -->
+        <!-- Topbar Start -->
+    <div class="container-fluid bg-dark">
+        <div class="row py-2 px-lg-5">
+            <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center text-white">
+                    <small><i class="fa fa-phone-alt mr-2"></i>+8210211847</small>
+                    <small class="px-3">|</small>
+                    <small><i class="fa fa-envelope mr-2"></i>kdhananjay444@gmail.com</small>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="{{ url_for('home') }}" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{{ url_for('home') }}" class="nav-item nav-link {% if request.path == url_for('home') %}active{% endif %}">Home</a>
+                    <a href="{{ url_for('about') }}" class="nav-item nav-link {% if request.path == url_for('about') %}active{% endif %}">About</a>
+                    <a href="{{ url_for('course') }}" class="nav-item nav-link {% if request.path == url_for('course') %}active{% endif %}">Courses</a>
+                    <a href="{{ url_for('gallery') }}" class="nav-item nav-link {% if request.path == url_for('gallery') %}active{% endif %}">Gallery</a>
+                    <a href="{{ url_for('blog') }}" class="nav-item nav-link {% if request.path == url_for('blog') %}active{% endif %}">Blog</a>
+                    <a href="{{ url_for('signin') }}" class="nav-item nav-link {% if request.path == url_for('signin') %}active{% endif %}">Sign in</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{ url_for('detail') }}" class="dropdown-item">Course Detail</a>
+                            <a href="{{ url_for('feature') }}" class="dropdown-item">Our Features</a>
+                            <a href="{{ url_for('team') }}" class="dropdown-item">Instructors</a>
+                            <a href="{{ url_for('testimonial') }}" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </div>
+                    <a href="{{ url_for('contact') }}" class="nav-item nav-link {% if request.path == url_for('contact') %}active{% endif %}">Contact</a>
+                </div>
+               
+            </div>
+        </nav>
+    </div>
+    
+        <!-- Navbar End -->
+        <!-- Header Start -->
+    <div class="jumbotron jumbotron-fluid page-header position-relative overlay-bottom" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-1">Blog</h1>
+            <div class="d-inline-flex text-white mb-5">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Blog</p>
+            </div>
+            <div class="mx-auto mb-5" style="width: 100%; max-width: 600px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Courses</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Courses 1</a>
+                            <a class="dropdown-item" href="#">Courses 2</a>
+                            <a class="dropdown-item" href="#">Courses 3</a>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control border-light" style="padding: 30px 25px;" placeholder="Keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary px-4 px-lg-5">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+        <!-- Blog Start -->
+        <div class="container mt-5">
+            <h1 class="text-center">Blog</h1>
+
+            <!-- Display Blog using Owl Carousel -->
+            <div class="owl-carousel owl-theme" id="blog-carousel">
+                {% for post in posts %}
+                <a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank"
+                    class="blog-item" onclick="handleBlogItemClick('{{ url_for('post_detail', post_id=post.id, _external=True) }}')">
+                    <div class="media-container">
+                        <img src="{{ url_for('static', filename='images/' + post.image) }}" alt="{{ post.title }}">
+                        <div class="blog-caption">
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.content }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="blog-pagination"></div>
+            <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+        </div>
+
+            
+
+        <!-- Add Bootstrap JS and Popper.js scripts -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <!-- Add Owl Carousel JS scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <!-- Add your custom script -->
+        <script>
+            $(document).ready(function () {
+                var blogOwl = $("#blog-carousel");
+        
+                blogOwl.owlCarousel({
+                    items: 3,
+                    margin: 20,
+                    loop: true,
+                    autoplay: false, // Disable autoplay
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        }
+                    }
+                });
+        
+                // Function to handle blog item click
+                function handleBlogItemClick(url) {
+                    redirectToReadMore(url);
+                }
+        
+                // Handle custom pagination
+                var totalItems = blogOwl.find('.owl-item').length; // Fix variable name
+                var itemsPerPage = 3;
+                var totalPages = Math.ceil(totalItems / itemsPerPage);
+                var currentPage = 1;
+                var maxButtonsToShow = 3; // Adjust this value as needed
+        
+                // Add previous button (<<)
+                var prevButton = $('<button class="page-link">&lt;&lt;</button>');
+                prevButton.on('click', function () {
+                    showPage(currentPage - 1);
+                });
+                $('#blog-pagination').append(prevButton); // Fix container ID
+        
+                // Add numbered buttons
+                for (var i = 1; i <= totalPages; i++) {
+                    if (i <= maxButtonsToShow || i > totalPages - maxButtonsToShow) {
+                        var pageButton = $('<button class="page-link">' + i + '</button>');
+                        pageButton.data('page', i);
+                        pageButton.on('click', function () {
+                            var page = $(this).data('page');
+                            showPage(page);
+                        });
+                        $('#blog-pagination').append(pageButton); // Fix container ID
+                    } else if (i === maxButtonsToShow + 1) {
+                        // Add ellipsis after the first set of buttons
+                        $('#blog-pagination').append('<span class="ellipsis">...</span>'); // Fix container ID
+                    }
+                }
+        
+                // Add next button (>>)
+                var nextButton = $('<button class="page-link">&gt;&gt;</button>');
+                nextButton.on('click', function () {
+                    showPage(currentPage + 1);
+                });
+                $('#blog-pagination').append(nextButton); // Fix container ID
+        
+                // Handle page button click event
+                function showPage(page) {
+                    if (page >= 1 && page <= totalPages) {
+                        blogOwl.trigger('to.owl.carousel', [(page - 1) * itemsPerPage, 300, true]);
+                        currentPage = page;
+                    }
+                }
+            });
+        </script>
+
+    
+</body>
+<footer class="bg-dark text-white">
+    <div class="container-fluid">
+        <div class="container mt-4 pt-4">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <a href="{{ url_for('home') }}" class="navbar-brand">
+                        <h1 class="mt-n2 text-uppercase text-white"><i class="fa fa-book-reader mr-3"></i>Edukate</h1>
+                    </a>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex flex-column align-items-start">
+                        <!-- Vertical List of Buttons -->
+                        <div class="mb-3">
+                            <a href="{{ url_for('home') }}" class="btn btn-link text-white">Home</a>
+                            <a href="{{ url_for('about') }}" class="btn btn-link text-white">About</a>
+                            <a href="{{ url_for('course') }}" class="btn btn-link text-white">Courses</a>
+                            <a href="{{ url_for('gallery') }}" class="btn btn-link text-white">Gallery</a>
+                            <a href="{{ url_for('blog') }}" class="btn btn-link text-white">Blog</a>
+                            <a href="{{ url_for('signin') }}" class="btn btn-link text-white">Sign in</a>
+                            <a href="{{ url_for('contact') }}" class="btn btn-link text-white">Contact</a>
+                        </div>
+                        <!-- End of Vertical List -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>
+
+
